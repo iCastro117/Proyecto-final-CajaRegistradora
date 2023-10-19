@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 class Producto {
     private String nombre;
     private double precio;
@@ -10,10 +7,6 @@ class Producto {
         this.nombre = nombre;
         this.precio = precio;
         this.codigo = codigo;
-    }
-
-    public String toString() {
-        return "Producto: " + nombre + "\nPrecio: $" + precio + "\nCódigo: " + codigo;
     }
 
     public String getNombre() {
@@ -38,5 +31,10 @@ class Producto {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto: " + nombre + "\nPrecio: $" + precio + "\nCódigo: " + codigo;
     }
 }
