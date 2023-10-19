@@ -1,6 +1,6 @@
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Principal {
     public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class Principal {
             System.out.print("Precio del producto: ");
             double precio = obtenerPrecioNice(scanner);
 
-            System.out.print("Codigo del producto: ");
+            System.out.print("Código del producto: ");
             int codigo = obtenerCodigoNice(scanner);
 
             Producto producto = new Producto(nombre, precio, codigo);
