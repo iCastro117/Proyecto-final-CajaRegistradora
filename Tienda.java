@@ -15,6 +15,7 @@ class Tienda {
     // Método para registrar un nuevo producto en la tienda.
     // Recibe el nombre, precio y código del producto a registrar.
     // Crea un nuevo objeto Producto y lo agrega a la lista de productos de la tienda.
+    //El método Add agraga un elemento de datos a un paquete
     public void registrarProducto(String nombre, double precio, int codigo) {
         Producto producto = new Producto(nombre, precio, codigo);
         productos.add(producto);
