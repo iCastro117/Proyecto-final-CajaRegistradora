@@ -1,10 +1,13 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class Tienda {
     private List<Producto> productos;
+    private Scanner scanner;
 
     public Tienda(List<Producto> productos) {
         this.productos = productos;
+        this.scanner = new Scanner(System.in);
     }
 
     public void registrarProducto(String nombre, double precio, int codigo) {
@@ -17,11 +20,8 @@ public class Tienda {
     }
 
     public void procesarCompra(List<Producto> carrito) {
-        double total = 0.0;
-        for (Producto producto : carrito) {
-            total += producto.getPrecio();
-        }
-         double total = 0;
+        double total = 0;
+
         System.out.println("Recibo de compra:");
 
         for (Producto producto : productos) {
@@ -37,7 +37,6 @@ public class Tienda {
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese el porcentaje de descuento (%): ");
-                    double porcentajeDescuento = scanner.nextDouble(); // Lee el porcentaje directamente
                     double porcentajeDescuento = scanner.nextDouble();
                     double descuento = producto.getPrecio() * (porcentajeDescuento / 100);
                     precioFinal = producto.getPrecio() - descuento;
@@ -46,12 +45,11 @@ public class Tienda {
                     break;
                 case 2:
                     System.out.println("No se aplica ningún descuento");
-                    System.out.println("No se aplica ningún descuento.");
                     precioFinal = producto.getPrecio();
                     break;
                 case 3:
                     System.out.print("Ingrese el descuento personalizado (%): ");
-                    double descuentoPersonalizado = scanner.nextDouble(); // Lee el descuento personalizado
+                    double descuentoPersonalizado = scanner.nextDouble();
                     double descuentoPersonalizadoFinal = producto.getPrecio() * (descuentoPersonalizado / 100);
                     precioFinal = producto.getPrecio() - descuentoPersonalizadoFinal;
                     producto.setPrecio(precioFinal);
@@ -59,7 +57,6 @@ public class Tienda {
                     break;
                 default:
                     System.out.println("Opción no válida");
-                    System.out.println("Opción no válida. No se aplica descuento.");
                     precioFinal = producto.getPrecio();
                     break;
             }
@@ -70,13 +67,12 @@ public class Tienda {
         System.out.println(" ");
         System.out.println("Total de la compra: $" + total);
     }
-    }
 
     public double calcularPrecioTotal() {
-                double total = 0;
+        double total = 0;
         for (Producto producto : productos) {
             total += producto.getPrecio();
-        return 0.0;
+        }
+        return total;
     }
 }
-
