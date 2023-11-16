@@ -1,4 +1,4 @@
-class Producto {
+public class Producto {
     private String nombre;
     private double precio;
     private int codigo;
@@ -31,9 +31,5 @@ class Producto {
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
-    }
-
-    public String toString() {
-        return "Producto: " + nombre + "\nPrecio: $" + precio + "\nCódigo: " + codigo;
     }
 }
