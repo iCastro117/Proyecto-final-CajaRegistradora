@@ -39,7 +39,7 @@ class Tienda {
             System.out.println(producto);
 
             System.out.println("¿El producto " + producto.getNombre() + " tiene descuento?");
-            System.out.println("(1) Sí   (2) No   (3) Aplicar descuento personalizado:");
+            System.out.println("(1) Sí   (2) No  ");
 
             System.out.print("¿El producto " + producto.getNombre() + " tiene descuento? (1) Sí   (2) No: ");
             int opcion = scanner.nextInt();
@@ -52,19 +52,27 @@ class Tienda {
                     double descuento = producto.getPrecio() * (porcentajeDescuento / 100);
                     precioFinal = producto.getPrecio() - descuento;
                     producto.setPrecio(precioFinal);
+
+                    System.out.println(" ");
+                    System.out.println(" ");
+
+                    System.out.println("---------------------------------------");
+                    System.out.println("RECIBO DE LA COMPRA");
+                    System.out.println("---------------------------------------");
+
+                    System.out.println("Descuento aplicado" + porcentajeDescuento);
                     System.out.println("Descuento del " + porcentajeDescuento + "% aplicado a " + producto.getNombre());
                     break;
+
                 case 2:
                     System.out.println("No se aplica ningún descuento");
                     precioFinal = producto.getPrecio();
-                    break;
-                case 3:
-                    System.out.print("Ingrese el descuento personalizado (%): ");
-                    double descuentoPersonalizado = scanner.nextDouble();
-                    double descuentoPersonalizadoFinal = producto.getPrecio() * (descuentoPersonalizado / 100);
-                    precioFinal = producto.getPrecio() - descuentoPersonalizadoFinal;
-                    producto.setPrecio(precioFinal);
-                    System.out.println("Descuento personalizado de %" + descuentoPersonalizado + " aplicado a " + producto.getNombre());
+
+                    System.out.println("---------------------------------------");
+                    System.out.println("RECIBO DE LA COMPRA");
+                    System.out.println("---------------------------------------");
+
+                    System.out.println("Descuento aplicado: ninguno");
                     break;
                 default:
                     System.out.println("Opción no válida");
@@ -75,8 +83,9 @@ class Tienda {
             total += precioFinal;
         }
 
-        System.out.println(" ");
+
         System.out.println("Total de la compra: $" + total);
+        System.out.println("---------------------------------------");
     }
 
     public double calcularPrecioTotal() {
