@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -14,7 +13,6 @@ public class Menu {
             System.out.println("1. Registrar Producto");
             System.out.println("2. Procesar Compra");
             System.out.println("3. Calcular Precio Total");
-            System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -29,9 +27,6 @@ public class Menu {
                 case 3:
                     double total = tienda.calcularPrecioTotal();
                     System.out.println("Precio total de la compra: $" + total);
-                    break;
-                case 4:
-                    System.out.println("Saliendo del programa. ¡Hasta luego!");
                     break;
                 default:
                     System.out.println("Opción no válida.");
