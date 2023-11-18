@@ -1,14 +1,13 @@
 import java.util.List;
 import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
 
 class Tienda {
     private List<Producto> productos;
-
+    private Scanner scanner;
     public Tienda(List<Producto> productos) {
         this.productos = productos;
+        this.scanner = new Scanner(System.in);
     }
 
     public void registrarProducto(Scanner scanner) {
@@ -31,7 +30,7 @@ class Tienda {
         System.out.println("Producto registrado exitosamente.");
     }
 
-    public void procesarCompra(List<Producto> carrito) {
+    public void procesarCompra(Scanner carrito) {
         double total = 0;
 
         System.out.println("Recibo de compra:");
