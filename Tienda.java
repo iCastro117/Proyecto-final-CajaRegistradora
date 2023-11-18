@@ -4,18 +4,27 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class Tienda {
+class Tienda {
     private List<Producto> productos;
-    private Scanner scanner;
 
     public Tienda(List<Producto> productos) {
         this.productos = productos;
-        this.scanner = new Scanner(System.in);
     }
 
-    public void registrarProducto(String nombre, double precio, int codigo) {
-        agregarProducto(new Producto(nombre, precio, codigo));
+    public void registrarProducto(Scanner scanner) {
+        scanner.nextLine();
+        System.out.print("Nombre del producto: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Precio del producto: ");
+        double precio = scanner.nextDouble();
+        System.out.print("Código del producto: ");
+        int codigo = scanner.nextInt();
+
+        Producto producto = new Producto(nombre, precio, codigo);
+        productos.add(producto);
+        System.out.println("Producto registrado con éxito.");
     }
+
 
     private void agregarProducto(Producto producto) {
         productos.add(producto);
