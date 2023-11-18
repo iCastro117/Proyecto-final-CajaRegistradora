@@ -25,10 +25,14 @@ public class Menu {
                     tienda.procesarCompra(scanner);
                     break;
                 case 3:
+                    double total1 = tienda.calcularPrecioTotal();
+                    System.out.println("Precio total de la compra: $" + total1);
+                    break;
+                case 4:
                     double total = tienda.calcularPrecioTotal();
                     System.out.println("Precio total de la compra: $" + total);
                     break;
-                default:
+                    default:
                     System.out.println("Opción no válida.");
             }
         }
