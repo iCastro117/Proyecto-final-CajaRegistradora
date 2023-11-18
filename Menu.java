@@ -31,7 +31,6 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("Saliendo del programa. ¡Hasta luego!");
-                    System.exit(0);
                 default:
                     System.out.println("Opción no válida.");
             }
