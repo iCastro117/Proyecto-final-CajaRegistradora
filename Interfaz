@@ -1,0 +1,24 @@
+btnGuardar.addActionListener(new ActionListener() {
+String nombre = txtNombre.getText();
+String codigo = txtCodigo.getText();
+String precio = txtPrecio.getText();
+String descuento = (chbDescuento.isSelected()==true) ? "Si" : "No";
+String total = txtTotal.getText();
+
+String mensaje = "Tus datos son: " + "\n" +
+                 "Nombre: " + nombre + "\n" +
+                 "Codigo: " + codigo + "\n" +
+                 "Precio: " + precio + "\n" +
+                 "Descuento: " + descuento + "\n" +
+                 "Total: " + total ;
+
+JoptionPane.showMenssageageDialog(btnGuardar, mensaje);
+}
+});
+}
+
+
+
+
+
+
