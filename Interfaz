@@ -1,24 +1,54 @@
-btnGuardar.addActionListener(new ActionListener() {
-String nombre = txtNombre.getText();
-String codigo = txtCodigo.getText();
-String precio = txtPrecio.getText();
-String descuento = (chbDescuento.isSelected()==true) ? "Si" : "No";
-String total = txtTotal.getText();
+package Menu;
 
-String mensaje = "Tus datos son: " + "\n" +
-                 "Nombre: " + nombre + "\n" +
-                 "Codigo: " + codigo + "\n" +
-                 "Precio: " + precio + "\n" +
-                 "Descuento: " + descuento + "\n" +
-                 "Total: " + total ;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-JoptionPane.showMenssageageDialog(btnGuardar, mensaje);
+public class IngresarProducto extends JFrame {
+    private JPanel pnlPrincipal;
+    private JLabel getLblNombre;
+    private JTextField getTxtNombre;
+    private JTextField getLblCodigo;
+    private JLabel getTxtCodigo;
+    private JLabel getLblPrecio;
+    private JTextField getTxtPrecio;
+    private JTextField getTxtDescuento;
+    private  JCheckBox chbAceptadescuento;
+    private JButton btnRegistrar;
+    private JLabel getLblDescuento;
+
+
+
+
+
+    public IngresarProducto () {
+
+        this.setContentPane(pnlPrincipal);
+        this.setSize(400, 300);
+
+        this.setVisible(true);
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = getTxtNombre.getText();
+                String codigo = getTxtCodigo.getText();
+                String precio = getTxtPrecio.getText();
+                String descuento = getTxtDescuento.getText();
+
+                String aceptadescuento = (chbAceptadescuento.isSelected()==true) ? "Si" : "No";
+
+
+                String mensaje = "Tus datos son " + "\n" +
+                        "Nombre " + nombre + "\n" +
+                        "Codigo " + codigo+ "\n" +
+                        "Precio " + precio + "\n" +
+                        "Descuento " + descuento + "\n" +
+                        "Acepta des " + aceptaTerminos;
+                        "Descuento " + descuento + "\n" +
+
+                JOptionPane.showMessageDialog(btnGuardar, mensaje);
+            }
+        });
+
+    }
 }
-});
-}
-
-
-
-
-
-
