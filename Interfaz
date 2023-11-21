@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Principal extends JFrame {
 
@@ -16,12 +18,14 @@ public class Principal extends JFrame {
     private JLabel lblDescuento;
     private JCheckBox chbAceptaDescuento;
     private JButton btnGuardar;
+    private JButton btnVerHistorial; // Botón para ver el historial
+    private List<String> historial; // Lista para almacenar el historial
 
     public Principal() {
         super("Caja Registradora");
 
         // Configuración del diseño
-        setLayout(new GridLayout(6, 2, 10, 10));
+        setLayout(new GridLayout(7, 2, 10, 10)); // Aumenté el número de filas para agregar el botón de historial
 
         // Componentes
         add(new JLabel("Nombre:"));
@@ -53,6 +57,19 @@ public class Principal extends JFrame {
         });
         add(btnGuardar);
 
+        // Botón para ver el historial
+        btnVerHistorial = new JButton("Ver Historial");
+        btnVerHistorial.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                verHistorial();
+            }
+        });
+        add(btnVerHistorial);
+
+        // Inicializar el historial
+        historial = new ArrayList<>();
+
         // Configuración de la ventana
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,22 +78,32 @@ public class Principal extends JFrame {
     }
 
     private void guardarVenta() {
-        // ☺
         String nombre = txtNombre.getText();
         String codigo = txtCodigo.getText();
         String precio = txtPrecio.getText();
         String descuento = txtDescuento.getText();
         boolean aceptaDescuento = chbAceptaDescuento.isSelected();
 
-        // Puedes imprimir o usar estos valores según tus necesidades
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Código: " + codigo);
-        System.out.println("Precio: " + precio);
-        System.out.println("Descuento: " + descuento);
-        System.out.println("Acepta Descuento: " + aceptaDescuento);
+        // Guardar en el historial
+        String venta = String.format("Nombre: %s, Código: %s, Precio: %s, Descuento: %s, Acepta Descuento: %s",
+                nombre, codigo, precio, descuento, aceptaDescuento);
+        historial.add(venta);
 
-        // Aquí puedes implementar la lógica para guardar la venta
+        // Imprimir en la consola (puedes modificar esta parte según tus necesidades)
+        System.out.println(venta);
+
+        // Mostrar mensaje de venta guardada
         JOptionPane.showMessageDialog(this, "Venta guardada.");
+    }
+
+    private void verHistorial() {
+        // Mostrar el historial en un cuadro de diálogo
+        StringBuilder historialTexto = new StringBuilder("Historial de Ventas:\n");
+        for (String venta : historial) {
+            historialTexto.append(venta).append("\n");
+        }
+
+        JOptionPane.showMessageDialog(this, historialTexto.toString(), "Historial de Ventas", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args) {
