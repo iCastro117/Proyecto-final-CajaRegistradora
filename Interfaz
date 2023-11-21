@@ -1,10 +1,10 @@
-package Menu;
-
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Principal extends JFrame {
+
     private JPanel pnlPrincipal;
     private JLabel lblNombre;
     private JTextField txtNombre;
@@ -18,29 +18,68 @@ public class Principal extends JFrame {
     private JButton btnGuardar;
 
     public Principal() {
-        this.setContentPane(pnlPrincipal);
-        this.setSize(400, 300);
-        this.setVisible(true);
+        super("Caja Registradora");
 
+        // Configuración del diseño
+        setLayout(new GridLayout(6, 2, 10, 10));
+
+        // Componentes
+        add(new JLabel("Nombre:"));
+        txtNombre = new JTextField();
+        add(txtNombre);
+
+        add(new JLabel("Código:"));
+        txtCodigo = new JTextField();
+        add(txtCodigo);
+
+        add(new JLabel("Precio:"));
+        txtPrecio = new JTextField();
+        add(txtPrecio);
+
+        add(new JLabel("Descuento:"));
+        txtDescuento = new JTextField();
+        add(txtDescuento);
+
+        add(new JLabel("Acepta Descuento:"));
+        chbAceptaDescuento = new JCheckBox();
+        add(chbAceptaDescuento);
+
+        btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = txtNombre.getText();
-                String codigo = txtCodigo.getText();
-                String precio = txtPrecio.getText();
-                String descuento = txtDescuento.getText();
-                String aceptaDescuento = (chbAceptaDescuento.isSelected()) ? "Sí" : "No";
-
-                String mensaje = "Tus datos son: \n" +
-                        "Nombre: " + nombre + "\n" +
-                        "Código: " + codigo + "\n" +
-                        "Precio: " + precio + "\n" +
-                        "Descuento: " + descuento + "\n" +
-                        "Acepta descuento: " + aceptaDescuento;
-
-                JOptionPane.showMessageDialog(Principal.this, mensaje);
+                guardarVenta();
             }
         });
+        add(btnGuardar);
+
+        // Configuración de la ventana
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void guardarVenta() {
+        // ☺
+        String nombre = txtNombre.getText();
+        String codigo = txtCodigo.getText();
+        String precio = txtPrecio.getText();
+        String descuento = txtDescuento.getText();
+        boolean aceptaDescuento = chbAceptaDescuento.isSelected();
+
+        // Puedes imprimir o usar estos valores según tus necesidades
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Código: " + codigo);
+        System.out.println("Precio: " + precio);
+        System.out.println("Descuento: " + descuento);
+        System.out.println("Acepta Descuento: " + aceptaDescuento);
+
+        // Aquí puedes implementar la lógica para guardar la venta
+        JOptionPane.showMessageDialog(this, "Venta guardada.");
+    }
+
+    public static void main(String[] args) {
+        new Principal();
     }
 }
-
