@@ -24,6 +24,12 @@ public class Principal extends JFrame {
     public Principal() {
         super("Caja Registradora");
 
+        // Establecer el color de fondo del contenedor principal
+        getContentPane().setBackground(Color.pink);
+
+
+
+
         // Configuración del diseño
         setLayout(new GridLayout(7, 2, 10, 10)); // Aumenté el número de filas para agregar el botón de historial
 
