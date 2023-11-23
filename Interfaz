@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Principal extends JFrame {
 
+    // Componentes de la interfaz
     private JPanel pnlPrincipal;
     private JLabel lblNombre;
     private JTextField txtNombre;
@@ -23,11 +24,13 @@ public class Principal extends JFrame {
     private JButton btnCalcularTotal;
     private List<Venta> historial;
 
+    // Constructor de la clase ☺
     public Principal() {
         super("Caja Registradora");
         getContentPane().setBackground(Color.pink);
         setLayout(new GridLayout(8, 2, 10, 10));
 
+        // Configuración de etiquetas y campos de texto ☺
         add(new JLabel("Nombre:"));
         txtNombre = new JTextField();
         add(txtNombre);
@@ -48,6 +51,7 @@ public class Principal extends JFrame {
         chbAceptaDescuento = new JCheckBox();
         add(chbAceptaDescuento);
 
+        // Configuración de botones y sus acciones ☺
         btnGuardar = new JButton("Guardar");
         btnGuardar.addActionListener(new ActionListener() {
             @Override
@@ -75,14 +79,17 @@ public class Principal extends JFrame {
         });
         add(btnCalcularTotal);
 
+        // Inicialización del historial ☺
         historial = new ArrayList<>();
 
+        // Configuración de la ventana
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
+    // Método para guardar una venta ☺
     private void guardarVenta() {
         String nombre = txtNombre.getText();
         String codigo = txtCodigo.getText();
@@ -103,6 +110,7 @@ public class Principal extends JFrame {
         JOptionPane.showMessageDialog(this, "Venta guardada. Total: $" + totalFormateado);
     }
 
+    // Método para ver el historial de ventas ☺
     private void verHistorial() {
         StringBuilder historialTexto = new StringBuilder("Historial de Ventas:\n");
         for (Venta venta : historial) {
@@ -112,6 +120,7 @@ public class Principal extends JFrame {
         JOptionPane.showMessageDialog(this, historialTexto.toString(), "Historial de Ventas", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // Método para calcular el total de todas las ventas ☺
     private void calcularTotal() {
         double totalVentas = 0;
 
@@ -125,6 +134,7 @@ public class Principal extends JFrame {
         JOptionPane.showMessageDialog(this, "Total de todas las ventas: $" + totalFormateado, "Total de Compra", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    // Método para obtener un valor double seguro desde una cadena ☺
     private double obtenerDouble(String texto) {
         try {
             return Double.parseDouble(texto);
@@ -134,6 +144,7 @@ public class Principal extends JFrame {
         }
     }
 
+    // Clase Venta para representar cada venta con detalles
     private static class Venta {
         private String nombre;
         private String codigo;
@@ -142,6 +153,7 @@ public class Principal extends JFrame {
         private boolean aceptaDescuento;
         private double total;
 
+        // Constructor de la clase Venta ☺
         public Venta(String nombre, String codigo, double precio, double descuento, boolean aceptaDescuento, double total) {
             this.nombre = nombre;
             this.codigo = codigo;
@@ -151,10 +163,12 @@ public class Principal extends JFrame {
             this.total = total;
         }
 
+        // Método para obtener el total de la venta
         public double getTotal() {
             return total;
         }
 
+        // Método para representar la venta como una cadena
         @Override
         public String toString() {
             return String.format("Nombre: %s, Código: %s, Precio: %.2f, Descuento: %.2f, Acepta Descuento: %s, Total: %.2f",
@@ -162,7 +176,9 @@ public class Principal extends JFrame {
         }
     }
 
+    // Método main para ejecutar la aplicación
     public static void main(String[] args) {
         new Principal();
     }
 }
+
