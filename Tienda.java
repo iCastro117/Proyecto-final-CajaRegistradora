@@ -1,15 +1,18 @@
 import java.util.List;
 import java.util.Scanner;
 
-
+// Clase que representa una tienda y gestiona operaciones relacionadas con productos
 class Tienda {
-    private List<Producto> productos;
-    private Scanner scanner;
+    private List<Producto> productos;  // Lista que almacena los productos de la tienda
+    private Scanner scanner;  // Objeto Scanner para leer la entrada del usuario
+
+    // Constructor de la clase Tienda que recibe una lista de productos
     public Tienda(List<Producto> productos) {
         this.productos = productos;
         this.scanner = new Scanner(System.in);
     }
 
+    // Método para registrar un nuevo producto en la tienda
     public void registrarProducto(Scanner scanner) {
         scanner.nextLine();
         System.out.print("Nombre del producto: ");
@@ -24,12 +27,13 @@ class Tienda {
         System.out.println("Producto registrado con éxito.");
     }
 
-
+    // Método privado para agregar un producto a la lista de productos
     private void agregarProducto(Producto producto) {
         productos.add(producto);
         System.out.println("Producto registrado exitosamente.");
     }
 
+    // Método para procesar una compra, aplicar descuentos y mostrar el recibo
     public void procesarCompra(Scanner carrito) {
         double total = 0;
 
@@ -83,11 +87,11 @@ class Tienda {
             total += precioFinal;
         }
 
-
         System.out.println("Total de la compra: $" + total);
         System.out.println("---------------------------------------");
     }
 
+    // Método para calcular el precio total de los productos en la tienda
     public double calcularPrecioTotal() {
         double total = 0;
         for (Producto producto : productos) {
