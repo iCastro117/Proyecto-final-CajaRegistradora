@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,22 +19,15 @@ public class Principal extends JFrame {
     private JLabel lblDescuento;
     private JCheckBox chbAceptaDescuento;
     private JButton btnGuardar;
-    private JButton btnVerHistorial; // Botón para ver el historial
-    private List<String> historial; // Lista para almacenar el historial
+    private JButton btnVerHistorial;
+    private JButton btnCalcularTotal;
+    private List<Venta> historial;
 
     public Principal() {
         super("Caja Registradora");
-
-        // Establecer el color de fondo del contenedor principal
         getContentPane().setBackground(Color.pink);
+        setLayout(new GridLayout(8, 2, 10, 10));
 
-
-
-
-        // Configuración del diseño
-        setLayout(new GridLayout(7, 2, 10, 10)); // Aumenté el número de filas para agregar el botón de historial
-
-        // Componentes
         add(new JLabel("Nombre:"));
         txtNombre = new JTextField();
         add(txtNombre);
@@ -63,7 +57,6 @@ public class Principal extends JFrame {
         });
         add(btnGuardar);
 
-        // Botón para ver el historial
         btnVerHistorial = new JButton("Ver Historial");
         btnVerHistorial.addActionListener(new ActionListener() {
             @Override
@@ -73,10 +66,17 @@ public class Principal extends JFrame {
         });
         add(btnVerHistorial);
 
-        // Inicializar el historial
+        btnCalcularTotal = new JButton("Calcular Total");
+        btnCalcularTotal.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calcularTotal();
+            }
+        });
+        add(btnCalcularTotal);
+
         historial = new ArrayList<>();
 
-        // Configuración de la ventana
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -86,30 +86,80 @@ public class Principal extends JFrame {
     private void guardarVenta() {
         String nombre = txtNombre.getText();
         String codigo = txtCodigo.getText();
-        String precio = txtPrecio.getText();
-        String descuento = txtDescuento.getText();
+        double precio = obtenerDouble(txtPrecio.getText());
+        double descuento = obtenerDouble(txtDescuento.getText());
         boolean aceptaDescuento = chbAceptaDescuento.isSelected();
 
-        // Guardar en el historial
-        String venta = String.format("Nombre: %s, Código: %s, Precio: %s, Descuento: %s, Acepta Descuento: %s",
-                nombre, codigo, precio, descuento, aceptaDescuento);
+        double total = precio - (aceptaDescuento ? (descuento / 100.0) * precio : 0);
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        String totalFormateado = df.format(total);
+
+        Venta venta = new Venta(nombre, codigo, precio, descuento, aceptaDescuento, total);
         historial.add(venta);
 
-        // Imprimir en la consola (puedes modificar esta parte según tus necesidades)
         System.out.println(venta);
 
-        // Mostrar mensaje de venta guardada
-        JOptionPane.showMessageDialog(this, "Venta guardada.");
+        JOptionPane.showMessageDialog(this, "Venta guardada. Total: $" + totalFormateado);
     }
 
     private void verHistorial() {
-        // Mostrar el historial en un cuadro de diálogo
         StringBuilder historialTexto = new StringBuilder("Historial de Ventas:\n");
-        for (String venta : historial) {
-            historialTexto.append(venta).append("\n");
+        for (Venta venta : historial) {
+            historialTexto.append(venta.toString()).append("\n");
         }
 
         JOptionPane.showMessageDialog(this, historialTexto.toString(), "Historial de Ventas", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void calcularTotal() {
+        double totalVentas = 0;
+
+        for (Venta venta : historial) {
+            totalVentas += venta.getTotal();
+        }
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        String totalFormateado = df.format(totalVentas);
+
+        JOptionPane.showMessageDialog(this, "Total de todas las ventas: $" + totalFormateado, "Total de Compra", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private double obtenerDouble(String texto) {
+        try {
+            return Double.parseDouble(texto);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Valor no válido. Se utilizará 0.", "Error", JOptionPane.ERROR_MESSAGE);
+            return 0.0;
+        }
+    }
+
+    private static class Venta {
+        private String nombre;
+        private String codigo;
+        private double precio;
+        private double descuento;
+        private boolean aceptaDescuento;
+        private double total;
+
+        public Venta(String nombre, String codigo, double precio, double descuento, boolean aceptaDescuento, double total) {
+            this.nombre = nombre;
+            this.codigo = codigo;
+            this.precio = precio;
+            this.descuento = descuento;
+            this.aceptaDescuento = aceptaDescuento;
+            this.total = total;
+        }
+
+        public double getTotal() {
+            return total;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Nombre: %s, Código: %s, Precio: %.2f, Descuento: %.2f, Acepta Descuento: %s, Total: %.2f",
+                    nombre, codigo, precio, descuento, aceptaDescuento, total);
+        }
     }
 
     public static void main(String[] args) {
